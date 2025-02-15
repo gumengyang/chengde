@@ -3,7 +3,7 @@
 https://gitee.com/zccbbg/wms-ruoyi
 
 #### github地址
-https://github.com/zccbbg/wms-ruoyi
+https://github.com/gumengyang/chengde.git
 
 ## 在线体验
 - 最近版V2 Lite演示地址：http://cangku.ichengle.top/
@@ -61,4 +61,4 @@ npm run dev
 |                  公众号                   |
 |:--------------------------------------:|
 | <img src="docs/gzh.jpg" width="200px"> |
-扫公众号二维码，关注后回复：“加群”或“支持”
+扫公众号二维码，关注后回复：“加群”或“支持”# chengde
