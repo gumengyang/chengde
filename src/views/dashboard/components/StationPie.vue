@@ -75,7 +75,7 @@ function initChart() {
     total = total + item.value
   })
   totalCount.value = total
-
+  console.log(chart.value,"chart.value")
   chart.value.setOption({
     tooltip: {
       trigger: 'item',
@@ -88,6 +88,7 @@ function initChart() {
       bottom: '0%',
       // top: '80%',
       formatter: (param) => {
+        console.log(param,"param-------")
         let item = props.pieData.find(c => c.name === param)
         if(!item) return ''
         let rate = !totalCount.value ? 0 : item.value / totalCount.value * 100

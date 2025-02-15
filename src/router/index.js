@@ -27,29 +27,8 @@ import Layout from '@/layout'
 // 公共路由
 export const constantRoutes = [
   {
-    path: '/redirect',
-    component: Layout,
-    hidden: true,
-    children: [
-      {
-        path: '/redirect/:path(.*)',
-        component: () => import('@/views/redirect/index.vue')
-      }
-    ]
-  },
-  {
     path: '/login',
     component: () => import('@/views/login'),
-    hidden: true
-  },
-  {
-    path: '/register',
-    component: () => import('@/views/register'),
-    hidden: true
-  },
-  {
-    path: "/:pathMatch(.*)*",
-    component: () => import('@/views/error/404'),
     hidden: true
   },
   {
@@ -60,47 +39,65 @@ export const constantRoutes = [
   {
     path: '',
     component: Layout,
-    redirect: '/index',
+    meta: { title: "入库模块", noCache: false, link: null, icon: "" },
     children: [
       {
-        path: '/index',
-        component: () => import('@/views/dashboard/charts'),
-        name: 'Index',
-        meta: { title: '首页', icon: 'redis', affix: true }
-      }
-    ]
-  },
-  {
-    path: '',
-    component: Layout,
-    redirect: '/dashboard',
-    children: [
+        path: '/billing',
+        component: () => import('@/views/storageModule/billing'),
+        name: 'billing',
+        meta: { title: '入库开单', icon: 'redis', affix: true }
+      },
       {
-        path: '/dashboard',
-        component: () => import('@/views/dashboard/dashboard'),
-        name: 'Dashboard',
-        meta: { title: '数据大屏', icon: 'dashboard', affix: true }
-      }
-    ]
-  },
-  {
-    path: '',
-    component: Layout,
-    redirect: '/description',
-    children: [
+        path: '/receive',
+        component: () => import('@/views/storageModule/receive'),
+        name: 'receive',
+        meta: { title: '入库收货', icon: 'redis', affix: true }
+      },
       {
-        path: '/description',
-        component: () => import('@/views/index'),
-        name: 'Description',
-        meta: { title: '项目介绍', icon: 'button', affix: true }
-      }
+        path: '/listing',
+        component: () => import('@/views/storageModule/listing'),
+        name: 'listing',
+        meta: { title: '入库上架', icon: 'redis', affix: true }
+      },
+      {
+        path: '/demo',
+        component: () => import('@/views/demo/demo/index'),
+        name: 'demo',
+        meta: { title: 'demo', icon: 'redis', affix: true }
+      },
     ]
   },
-  {
-    path: '/system/dashboard',
-    component: () => import('@/views/dashboard/dashboard'),
-    hidden: true
-  },
+  // {
+  //   path: '',
+  //   component: Layout,
+  //   redirect: '/dashboard',
+  //   children: [
+  //     {
+  //       path: '/dashboard',
+  //       component: () => import('@/views/dashboard/dashboard'),
+  //       name: 'Dashboard',
+  //       meta: { title: '数据大屏', icon: 'dashboard', affix: true }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '',
+  //   component: Layout,
+  //   redirect: '/description',
+  //   children: [
+  //     {
+  //       path: '/description',
+  //       component: () => import('@/views/index'),
+  //       name: 'Description',
+  //       meta: { title: '项目介绍', icon: 'button', affix: true }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/system/dashboard',
+  //   component: () => import('@/views/dashboard/dashboard'),
+  //   hidden: true
+  // },
   {
     path: '/user',
     component: Layout,
@@ -119,76 +116,76 @@ export const constantRoutes = [
 
 // 动态路由，基于用户权限动态去加载
 export const dynamicRoutes = [
-  {
-    path: '/system/user-auth',
-    component: Layout,
-    hidden: true,
-    permissions: ['system:user:edit'],
-    children: [
-      {
-        path: 'role/:userId(\\d+)',
-        component: () => import('@/views/system/user/authRole'),
-        name: 'AuthRole',
-        meta: { title: '分配角色', activeMenu: '/system/user' }
-      }
-    ]
-  },
-  {
-    path: '/system/role-auth',
-    component: Layout,
-    hidden: true,
-    permissions: ['system:role:edit'],
-    children: [
-      {
-        path: 'user/:roleId(\\d+)',
-        component: () => import('@/views/system/role/authUser'),
-        name: 'AuthUser',
-        meta: { title: '分配用户', activeMenu: '/system/role' }
-      }
-    ]
-  },
-  {
-    path: '/system/dict-data',
-    component: Layout,
-    hidden: true,
-    permissions: ['system:dict:list'],
-    children: [
-      {
-        path: 'index/:dictId(\\d+)',
-        component: () => import('@/views/system/dict/data'),
-        name: 'Data',
-        meta: { title: '字典数据', activeMenu: '/system/dict' }
-      }
-    ]
-  },
-  {
-    path: '/system/oss-config',
-    component: Layout,
-    hidden: true,
-    permissions: ['system:oss:list'],
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/system/oss/config'),
-        name: 'OssConfig',
-        meta: { title: '配置管理', activeMenu: '/system/oss'}
-      }
-    ]
-  },
-  {
-    path: '/tool/gen-edit',
-    component: Layout,
-    hidden: true,
-    permissions: ['tool:gen:edit'],
-    children: [
-      {
-        path: 'index/:tableId(\\d+)',
-        component: () => import('@/views/tool/gen/editTable'),
-        name: 'GenEdit',
-        meta: { title: '修改生成配置', activeMenu: '/tool/gen' }
-      }
-    ]
-  }
+  // {
+  //   path: '/system/user-auth',
+  //   component: Layout,
+  //   hidden: true,
+  //   permissions: ['system:user:edit'],
+  //   children: [
+  //     {
+  //       path: 'role/:userId(\\d+)',
+  //       component: () => import('@/views/system/user/authRole'),
+  //       name: 'AuthRole',
+  //       meta: { title: '分配角色', activeMenu: '/system/user' }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/system/role-auth',
+  //   component: Layout,
+  //   hidden: true,
+  //   permissions: ['system:role:edit'],
+  //   children: [
+  //     {
+  //       path: 'user/:roleId(\\d+)',
+  //       component: () => import('@/views/system/role/authUser'),
+  //       name: 'AuthUser',
+  //       meta: { title: '分配用户', activeMenu: '/system/role' }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/system/dict-data',
+  //   component: Layout,
+  //   hidden: true,
+  //   permissions: ['system:dict:list'],
+  //   children: [
+  //     {
+  //       path: 'index/:dictId(\\d+)',
+  //       component: () => import('@/views/system/dict/data'),
+  //       name: 'Data',
+  //       meta: { title: '字典数据', activeMenu: '/system/dict' }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/system/oss-config',
+  //   component: Layout,
+  //   hidden: true,
+  //   permissions: ['system:oss:list'],
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/system/oss/config'),
+  //       name: 'OssConfig',
+  //       meta: { title: '配置管理', activeMenu: '/system/oss'}
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/tool/gen-edit',
+  //   component: Layout,
+  //   hidden: true,
+  //   permissions: ['tool:gen:edit'],
+  //   children: [
+  //     {
+  //       path: 'index/:tableId(\\d+)',
+  //       component: () => import('@/views/tool/gen/editTable'),
+  //       name: 'GenEdit',
+  //       meta: { title: '修改生成配置', activeMenu: '/tool/gen' }
+  //     }
+  //   ]
+  // }
 ]
 
 const router = createRouter({
@@ -202,5 +199,6 @@ const router = createRouter({
     }
   },
 });
+
 
 export default router;

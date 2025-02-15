@@ -35,21 +35,30 @@ const usePermissionStore = defineStore(
       generateRoutes(roles) {
         return new Promise(resolve => {
           // 向后端请求路由数据
-          getRouters().then(res => {
-            const sdata = JSON.parse(JSON.stringify(res.data))
-            const rdata = JSON.parse(JSON.stringify(res.data))
-            const defaultData = JSON.parse(JSON.stringify(res.data))
+          //getRouters().then(res => {
+            // const sdata = JSON.parse(JSON.stringify(res.data))
+            // const rdata = JSON.parse(JSON.stringify(res.data))
+            // const defaultData = JSON.parse(JSON.stringify(res.data))
+            const sdata = []
+            const rdata = []
+            const defaultData = JSON.parse(JSON.stringify([]))
             const sidebarRoutes = filterAsyncRouter(sdata)
             const rewriteRoutes = filterAsyncRouter(rdata, false, true)
             const defaultRoutes = filterAsyncRouter(defaultData)
             const asyncRoutes = filterDynamicRoutes(dynamicRoutes)
-            asyncRoutes.forEach(route => { router.addRoute(route) })
-            this.setRoutes(rewriteRoutes)
-            this.setSidebarRouters(constantRoutes.concat(sidebarRoutes))
-            this.setDefaultRoutes(sidebarRoutes)
-            this.setTopbarRoutes(defaultRoutes)
-            resolve(rewriteRoutes)
-          })
+            
+            // asyncRoutes.forEach(route => { router.addRoute(route) })
+            this.setRoutes(asyncRoutes)
+            this.setSidebarRouters(constantRoutes.concat(asyncRoutes))
+            this.setDefaultRoutes(asyncRoutes)
+            this.setTopbarRoutes(asyncRoutes)
+            console.log('asyncRoutes',asyncRoutes,this.routes,this.defaultRoutes,this.topbarRouters,this.sidebarRouters);
+            console.log('routes',this.routes);
+            console.log('defaultRoutes',this.defaultRoutes);
+            console.log('topbarRouters',this.topbarRouters);
+            console.log('sidebarRouters',this.sidebarRouters);
+            resolve(asyncRoutes)
+          //})
         })
       }
     }
@@ -101,10 +110,6 @@ function filterChildren(childrenMap, lastRouter = false) {
     }
     if (lastRouter) {
       el.path = lastRouter.path + '/' + el.path
-      if (el.children && el.children.length) {
-        children = children.concat(filterChildren(el.children, el))
-        return
-      }
     }
     children = children.concat(el)
   })
